@@ -1,0 +1,54 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../lib/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="sticky top-0 z-40 border-b border-stone/70 bg-cream/85 backdrop-blur-md">
+  <div class="wrap flex h-16 items-center justify-between gap-6">
+    <a href="/" aria-label="huni home"><Logo /></a>
+
+    <nav aria-label="Main" class="hidden md:block">
+      <ul class="flex items-center gap-8 text-sm">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={path === item.href ? 'page' : undefined}
+                class="relative py-1 transition-colors hover:text-propolis aria-[current=page]:text-propolis after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100 aria-[current=page]:after:scale-x-100"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/join" class="btn-honey hidden px-5! py-2.5! sm:inline-flex">Join the hive</a>
+      <details class="group relative md:hidden">
+        <summary class="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-ink/20" aria-label="Menu">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path class="group-open:hidden" d="M4 8h16M4 16h16" />
+            <path class="hidden group-open:block" d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </summary>
+        <nav aria-label="Mobile" class="absolute right-0 mt-3 w-60 rounded-2xl border border-stone bg-wax p-3 shadow-xl">
+          <ul class="grid gap-1">
+            {
+              nav.map((item) => (
+                <li>
+                  <a href={item.href} class="block rounded-xl px-4 py-3 hover:bg-cream">{item.label}</a>
+                </li>
+              ))
+            }
+            <li><a href="/join" class="btn-honey mt-2 w-full justify-center">Join the hive</a></li>
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

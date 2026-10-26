@@ -1,0 +1,25 @@
+---
+// Honey dripping off the bottom edge of a section into the next one.
+interface Props {
+  fill?: string;
+  class?: string;
+}
+const { fill = 'var(--color-comb)', class: className } = Astro.props;
+
+// [centre x, shoulder width, length, tip radius] in a 1200×64 box.
+const drips = [
+  [1110, 26, 34, 5], [930, 34, 50, 6], [760, 22, 26, 4], [585, 30, 44, 6], [410, 24, 30, 5], [230, 36, 56, 7], [80, 20, 22, 4],
+];
+const band = 10;
+let d = `M0 0H1200V${band}`;
+for (const [x, w, l, r] of drips) {
+  const tip = band + l - r;
+  d += `L${x + w} ${band}C${x + w / 2} ${band} ${x + r} ${band + l * 0.35} ${x + r} ${tip}`;
+  d += `A${r} ${r} 0 0 1 ${x - r} ${tip}C${x - r} ${band + l * 0.35} ${x - w / 2} ${band} ${x - w} ${band}`;
+}
+d += `L0 ${band}Z`;
+---
+
+<svg class:list={['block h-10 w-full sm:h-16', className]} viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true">
+  <path fill={fill} d={d} />
+</svg>

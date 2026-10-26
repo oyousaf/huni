@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import forestImg from '../assets/images/yucatan-forest.jpg';
+import keeperImg from '../assets/images/beekeeper-hive.jpg';
+import combImg from '../assets/images/comb-frame.jpg';
+import pollenImg from '../assets/images/bee-pollen.jpg';
+
+const journey = [
+  { place: 'The forest', copy: 'Bees forage the wild flowers of the Yucatán forest through the dry season bloom.' },
+  { place: 'The hive', copy: 'Mayan beekeepers harvest by hand, leaving the colony enough to thrive.' },
+  { place: 'Mérida', copy: 'Raw honey goes into small batches, made by hand close to where it was harvested.' },
+  { place: 'Your shelf', copy: 'Every batch is single-origin and traceable back to the hive it came from.' },
+];
+---
+
+<Base title="Origin" description="Yucatán, Mérida and the Mayan beekeepers behind every huni batch.">
+  <PageHero label="Origin · Yucatán, Mexico" title="Honey from beekeepers we know <em>by name</em>." intro="Before there was a formula, there was a trip to the forests around Mérida — and the families who have kept bees there for generations." image={forestImg} />
+
+  <section class="wrap grid items-center gap-14 py-24 lg:grid-cols-2">
+    <div>
+      <SectionHead label="Xunan kab" title="The <em>royal lady</em> bee." />
+      <div class="mt-8 grid gap-5 text-ink-soft" data-reveal>
+        <p><em>Melipona beecheii</em> is a stingless bee native to the Yucatán peninsula. Maya beekeepers have tended it for well over a thousand years, keeping colonies in hollow logs called <em>jobones</em>.</p>
+        <p>Its honey is rare, thin and prized. Today the tradition is fragile — which is exactly why sourcing from the people who keep it alive matters.</p>
+      </div>
+      <a href="/pollinator-index" class="btn-ghost mt-8">See where it's been recorded →</a>
+    </div>
+    <div class="grid grid-cols-2 gap-4" data-reveal>
+      <Image src={pollenImg} alt="A bee covered in pollen on a yellow flower" widths={[500, 960]} sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/4] w-full rounded-[2rem] object-cover" />
+      <Image src={combImg} alt="A frame of capped honeycomb covered in bees" widths={[500, 1024]} sizes="(min-width: 1024px) 25vw, 50vw" class="mt-12 aspect-[3/4] w-full rounded-[2rem] object-cover" />
+    </div>
+  </section>
+
+  <section class="bg-jungle py-24 text-cream">
+    <div class="wrap">
+      <SectionHead label="Hive to bottle" title="Short journey. <em>Full</em> traceability." light />
+      <ol class="mt-14 grid gap-px overflow-hidden rounded-3xl bg-cream/15 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          journey.map((j, i) => (
+            <li class="bg-jungle p-8" data-reveal data-delay={i * 0.08}>
+              <span class="label-light">Stop {i + 1}</span>
+              <h3 class="mt-4 text-2xl">{j.place}</h3>
+              <p class="mt-3 text-sm text-cream/75">{j.copy}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap grid items-center gap-14 py-24 lg:grid-cols-[1.1fr_1fr]">
+    <div>
+      <SectionHead label="Our story" title="Two founders, one <em>frustration</em>." />
+      <div class="mt-8 grid gap-5 text-ink-soft" data-reveal>
+        <p>The founders kept finding honey on beauty labels and almost none in the bottle. So they went looking for honey worth building a formula around — and found it in Yucatán.</p>
+        <p>1% of profit goes back to pollinators: planting wildflower corridors and supporting the hives that make it all possible.</p>
+      </div>
+    </div>
+    <Image src={keeperImg} alt="A beekeeper in a protective suit inspecting a hive" widths={[600, 960]} sizes="(min-width: 1024px) 45vw, 100vw" class="aspect-[4/3] w-full rounded-[2.5rem] object-cover" data-reveal />
+  </section>
+</Base>

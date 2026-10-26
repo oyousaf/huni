@@ -1,0 +1,36 @@
+---
+import Logo from './Logo.astro';
+import { nav, site } from '../lib/site';
+---
+
+<footer class="hex-bg relative bg-ink text-cream">
+  <div class="wrap grid gap-12 py-20 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="max-w-sm">
+      <Logo class="text-cream" />
+      <p class="mt-5 text-sm leading-relaxed text-cream/70">
+        Small-batch hair &amp; body care made with organic raw honey from Mayan beekeepers in Yucatán.
+        Home-compostable bottle. 1% for the pollinators.
+      </p>
+    </div>
+
+    <div>
+      <p class="label-light">Explore</p>
+      <ul class="mt-5 grid gap-3 text-sm text-cream/80">
+        {nav.map((item) => <li><a href={item.href} class="hover:text-comb">{item.label}</a></li>)}
+        <li><a href="/join" class="hover:text-comb">Join the hive</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="label-light">This concept</p>
+      <ul class="mt-5 grid gap-3 text-sm text-cream/80">
+        <li><a href="/concept" class="hover:text-comb">Audit &amp; design notes</a></li>
+        <li><a href="/credits" class="hover:text-comb">Image &amp; data credits</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <p class="wrap py-6 font-label text-[11px] leading-relaxed text-cream/60">{site.disclaimer}</p>
+  </div>
+</footer>

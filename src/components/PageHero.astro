@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import DripEdge from './DripEdge.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  intro?: string;
+  image?: ImageMetadata;
+}
+const { label, title, intro, image } = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-ink text-cream">
+  {
+    image && (
+      <>
+        <Image src={image} alt="" widths={[800, 1400, 2000]} sizes="100vw" loading="eager" class="absolute inset-0 -z-10 size-full object-cover opacity-55" data-parallax />
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/70 to-ink/20" />
+      </>
+    )
+  }
+  <div class:list={['wrap', image ? 'py-32 sm:py-40' : 'hex-bg py-24 sm:py-28']}>
+    <p class="label-light" data-reveal>{label}</p>
+    <h1 class="mt-5 max-w-3xl text-5xl leading-[1] font-light tracking-tight sm:text-7xl" data-reveal data-delay="0.1" set:html={title} />
+    {intro && <p class="mt-7 max-w-xl text-lg leading-relaxed text-cream/80" data-reveal data-delay="0.2">{intro}</p>}
+  </div>
+</section>
+<DripEdge class="-mt-px bg-cream" />

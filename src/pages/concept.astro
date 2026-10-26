@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { site } from '../lib/site';
+
+const findings = [
+  { area: 'Conversion', before: 'Three separate email forms and a main button that linked to “#”. No product shown anywhere.', after: 'One sign-up, a visible range, and a story that explains the product before asking for an email.' },
+  { area: 'Performance', before: '≈14 MB of media on first load: a 9 MB autoplay video, a 372 KB PNG logo, no lazy loading.', after: 'Static Astro pages, responsive AVIF/WebP images, an SVG mark, and the map only loads when scrolled to.' },
+  { area: 'Trust & claims', before: '“Live” impact stats were hard-coded numbers; “organic” and “home compostable” had no certifier named.', after: 'The Pollinator Index runs on open data (GBIF, iNaturalist, Open-Meteo) with sources shown on every figure.' },
+  { area: 'SEO & sharing', before: 'Relative og:image (broken link previews), no canonical, no favicon, single URL.', after: 'Absolute OG image, canonical URLs, favicon and separate pages per topic.' },
+  { area: 'Accessibility', before: 'Small amber and grey text below WCAG AA contrast; many dead footer links.', after: 'A palette checked for AA, skip link, focus styles, reduced-motion support and no dead links.' },
+  { area: 'Licensing', before: 'Brand typeface used commercially under a personal-use licence.', after: 'Fraunces, Instrument Sans and Courier Prime — all under the SIL Open Font Licence.' },
+];
+
+const palette = [
+  ['comb', '#E0A526'], ['honey', '#C77B1E'], ['propolis', '#8A4A12'], ['cream', '#F6F1E7'], ['ink', '#1E1A16'], ['jungle', '#2F4A3A'],
+];
+---
+
+<Base title="Concept notes" description="Audit and design rationale behind this unofficial huni redesign.">
+  <PageHero label="Concept notes" title="Redesigning a honey brand, <em>honestly</em>." intro="An unsolicited portfolio redesign of beehuni.com: what the audit found, and what changed." />
+
+  <section class="wrap py-20">
+    <SectionHead label="Audit → redesign" title="Six things worth <em>fixing</em>." />
+    <div class="mt-12 overflow-hidden rounded-3xl border border-stone">
+      {
+        findings.map((f) => (
+          <div class="grid gap-4 border-b border-stone bg-wax p-6 last:border-b-0 md:grid-cols-[10rem_1fr_1fr] md:gap-8" data-reveal>
+            <p class="label">{f.area}</p>
+            <p class="text-sm text-ink-soft"><span class="font-label text-[10px] uppercase tracking-wider text-ink/50">Before · </span>{f.before}</p>
+            <p class="text-sm"><span class="font-label text-[10px] uppercase tracking-wider text-propolis">After · </span>{f.after}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-wax py-20">
+    <div class="wrap grid gap-14 lg:grid-cols-2">
+      <div>
+        <SectionHead label="Colour" title="Liquid honey, not <em>hazard tape</em>." />
+        <p class="mt-5 text-ink-soft" data-reveal>Gold leads, orange only adds depth, and forest green keeps it from tipping into cartoon. Roughly 70% cream and ink, 20% honey, 10% green.</p>
+        <ul class="mt-8 grid grid-cols-3 gap-3" data-reveal>
+          {
+            palette.map(([name, hex]) => (
+              <li>
+                <span class="hex-clip block aspect-[1.1] w-full" style={`background:${hex}`} />
+                <p class="mt-2 font-label text-xs">{name}<br /><span class="text-ink/60">{hex}</span></p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <SectionHead label="Type & stack" title="Warm serif, quiet sans, a <em>typewriter</em> wink." />
+        <ul class="mt-8 grid gap-4" data-reveal>
+          <li class="rounded-2xl border border-stone bg-cream p-5"><p class="font-display text-3xl">Fraunces</p><p class="mt-1 text-sm text-ink-soft">Headlines — soft, slightly melted, honey-like.</p></li>
+          <li class="rounded-2xl border border-stone bg-cream p-5"><p class="text-xl">Instrument Sans</p><p class="mt-1 text-sm text-ink-soft">Body — warmer and more editorial than Montserrat.</p></li>
+          <li class="rounded-2xl border border-stone bg-cream p-5"><p class="font-label text-lg">Courier Prime</p><p class="mt-1 text-sm text-ink-soft">Labels and stats — keeps the original's batch-label feel.</p></li>
+          <li class="rounded-2xl border border-stone bg-cream p-5"><p class="font-label text-sm">Astro · Tailwind CSS v4 · Motion · Leaflet</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap py-16">
+    <p class="max-w-2xl text-sm text-ink-soft">{site.disclaimer} <a class="underline decoration-comb underline-offset-4" href={site.original} rel="noopener">See the original site ↗</a></p>
+  </section>
+</Base>

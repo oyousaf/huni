@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Bottle from '../components/Bottle.astro';
+import JoinForm from '../components/JoinForm.astro';
+import { range } from '../lib/range';
+---
+
+<Base title="The range" description="The first huni range: honey shampoo, conditioner and body wash. Concept preview.">
+  <PageHero label="The range · coming soon" title="Chapter one, <em>bottled</em>." intro="Three everyday formulas, each built around organic raw honey. Join the hive to hear first when they land." />
+
+  <section class="wrap grid gap-20 py-24">
+    {
+      range.map((p, i) => (
+        <article class:list={['grid items-center gap-10 md:grid-cols-2', i % 2 && 'md:[&>*:first-child]:order-2']}>
+          <div class="grid place-items-center rounded-[2.5rem] bg-wax py-16" data-reveal>
+            <Bottle name={p.name} tint={p.tint} class="h-80" />
+          </div>
+          <div data-reveal data-delay="0.1">
+            <p class="label">{p.note}</p>
+            <h2 class="mt-4 text-4xl font-light sm:text-5xl">{p.name}</h2>
+            <p class="mt-5 max-w-md text-lg text-ink-soft">{p.copy}</p>
+            <p class="mt-8 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 font-label text-xs">
+              <span class="size-2 rounded-full bg-comb" /> Coming soon
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="hex-bg bg-ink py-24 text-cream">
+    <div class="wrap grid items-center gap-10 lg:grid-cols-2">
+      <h2 class="text-4xl font-light sm:text-5xl" data-reveal>Hear first when it <em class="text-comb">lands</em>.</h2>
+      <div data-reveal data-delay="0.1"><JoinForm light /></div>
+    </div>
+  </section>
+</Base>

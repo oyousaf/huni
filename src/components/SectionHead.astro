@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  light?: boolean;
+  center?: boolean;
+}
+const { label, title, light = false, center = false } = Astro.props;
+---
+
+<div class:list={['max-w-2xl', center && 'mx-auto text-center']} data-reveal>
+  <p class={light ? 'label-light' : 'label'}>{label}</p>
+  <h2 class="mt-4 text-4xl leading-[1.05] font-light tracking-tight sm:text-5xl" set:html={title} />
+  <slot />
+</div>

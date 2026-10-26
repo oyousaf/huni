@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const images = [
+  { file: 'Honey jar with honeycomb', source: 'Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Small_Honey_Jar_with_Honeycomb_-_51329904367.jpg' },
+  { file: 'Honey jar with dipper', source: 'Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Small_Honey_Jar_with_Honeycomb.jpg' },
+  { file: 'Xlapak ruins in the Yucatán forest', source: 'Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Xlapac_Ruins_in_Jungle.jpg' },
+  { file: 'Honey dripping', source: 'rawpixel (public domain)', url: 'https://www.rawpixel.com/' },
+  { file: 'Hand holding honeycomb frame', source: 'rawpixel (public domain)', url: 'https://www.rawpixel.com/' },
+  { file: 'Bee on coneflower, bees on yellow flowers, beekeeper', source: 'StockSnap', url: 'https://stocksnap.io/' },
+];
+
+const data = [
+  { name: 'GBIF — Global Biodiversity Information Facility', use: 'Melipona beecheii occurrence records', url: 'https://www.gbif.org/species/1340088' },
+  { name: 'iNaturalist', use: 'Wild bee (Anthophila) sightings near you', url: 'https://www.inaturalist.org/' },
+  { name: 'Open-Meteo', use: 'Mérida weather and place search', url: 'https://open-meteo.com/' },
+  { name: 'OpenStreetMap contributors', use: 'Map tiles', url: 'https://www.openstreetmap.org/copyright' },
+  { name: 'huni corridor API', use: 'Public, read-only planting corridor pins', url: 'https://www.beehuni.com' },
+];
+---
+
+<Base title="Credits" description="Image and data credits for the huni concept redesign.">
+  <PageHero label="Credits" title="Borrowed <em>with thanks</em>." intro="Every photo here is CC0 or public domain, found via Openverse. Every number comes from an open API." />
+
+  <section class="wrap grid gap-16 py-20 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl">Images · CC0</h2>
+      <ul class="mt-6 divide-y divide-stone border-y border-stone">
+        {images.map((i) => <li class="py-4"><a href={i.url} rel="noopener" class="hover:text-propolis">{i.file}</a><p class="font-label text-xs text-ink/60">{i.source}</p></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-3xl">Data</h2>
+      <ul class="mt-6 divide-y divide-stone border-y border-stone">
+        {data.map((d) => <li class="py-4"><a href={d.url} rel="noopener" class="hover:text-propolis">{d.name}</a><p class="font-label text-xs text-ink/60">{d.use}</p></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>

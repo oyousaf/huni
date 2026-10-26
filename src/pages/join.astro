@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import JoinForm from '../components/JoinForm.astro';
+import beeImg from '../assets/images/bee-sunflower.jpg';
+
+const perks = ['Early access when the range launches', 'A packet of wildflower seeds for your patch', 'A weekly sample-pack draw until launch'];
+---
+
+<Base title="Join the hive" description="Join the huni waitlist for launch access, wildflower seeds and the weekly sample-pack draw.">
+  <section class="wrap grid min-h-[80svh] items-center gap-14 py-20 lg:grid-cols-2">
+    <div>
+      <p class="label" data-reveal>Join the hive</p>
+      <h1 class="mt-5 text-5xl leading-[1] font-light tracking-tight sm:text-7xl" data-reveal data-delay="0.1">
+        Something is <em class="text-honey">growing</em>.
+      </h1>
+      <ul class="mt-10 grid gap-4" data-reveal data-delay="0.2">
+        {
+          perks.map((p) => (
+            <li class="flex items-center gap-4">
+              <span class="hex-clip size-6 shrink-0 bg-comb" />
+              {p}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-10" data-reveal data-delay="0.3"><JoinForm /></div>
+      <p class="mt-6 text-sm text-ink-soft">Draw terms would be published here at launch.</p>
+    </div>
+    <Image src={beeImg} alt="A bumblebee foraging on a yellow flower" widths={[600, 960]} sizes="(min-width: 1024px) 45vw, 100vw" class="hex-clip aspect-[1.1] w-full object-cover" data-reveal />
+  </section>
+</Base>

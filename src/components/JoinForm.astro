@@ -1,0 +1,57 @@
+---
+// One sign-up replaces the original site's three competing forms.
+// Concept build: nothing leaves the browser.
+interface Props {
+  light?: boolean;
+}
+const { light = false } = Astro.props;
+---
+
+<form class="join-form w-full max-w-lg" novalidate>
+  <label for="join-email" class="sr-only">Email address</label>
+  <div
+    class:list={[
+      'flex flex-col gap-2 rounded-[2rem] border p-2 sm:flex-row sm:rounded-full',
+      light ? 'border-cream/25 bg-cream/5' : 'border-ink/15 bg-wax',
+    ]}
+  >
+    <input
+      id="join-email"
+      name="email"
+      type="email"
+      required
+      autocomplete="email"
+      placeholder="you@example.com"
+      class:list={['min-w-0 flex-1 bg-transparent px-5 py-3 outline-none', light ? 'placeholder:text-cream/50' : 'placeholder:text-ink/40']}
+    />
+    <button type="submit" class="btn-honey justify-center">Join the hive →</button>
+  </div>
+  <label class:list={['mt-4 flex items-start gap-3 text-sm', light ? 'text-cream/75' : 'text-ink-soft']}>
+    <input type="checkbox" name="draw" checked class="mt-0.5 size-4 accent-honey" />
+    <span>Enter the weekly sample-pack draw too.</span>
+  </label>
+  <p class="join-status mt-4 min-h-6 font-label text-xs" role="status" aria-live="polite"></p>
+  <p class:list={['font-label text-[10px] tracking-wide', light ? 'text-cream/50' : 'text-ink/50']}>
+    Concept demo: your email stays in this browser and is never sent anywhere.
+  </p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('.join-form').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.join-status')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector<HTMLInputElement>('input[type=email]')!;
+      if (!email.checkValidity()) {
+        status.textContent = 'That email doesn’t look quite right.';
+        email.focus();
+        return;
+      }
+      try {
+        localStorage.setItem('huni-hive', JSON.stringify({ email: email.value, at: Date.now() }));
+      } catch {}
+      status.textContent = 'You’re in the hive. Seeds are on their way (in a real launch).';
+      form.reset();
+    });
+  });
+</script>
