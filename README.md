@@ -1,38 +1,28 @@
-# huni — concept redesign
+# huni
 
-An unofficial portfolio redesign of [huni](https://www.beehuni.com), a honey hair & body care brand.
-Not affiliated with, endorsed by or connected to huni Beauty Limited.
+huni, a small-batch hair and body care brand built around organic raw honey from
+Mayan beekeepers in Yucatán, Mexico. Unofficial and not affiliated with huni Beauty Limited.
 
-## Stack
+## What's on the site
 
-- [Astro](https://astro.build) — static pages, built-in image optimisation
-- [Tailwind CSS v4](https://tailwindcss.com) — design tokens in `src/styles/global.css`
-- [Motion](https://motion.dev) — scroll reveals, count-ups, parallax and the scroll-driven bee
-- [Leaflet](https://leafletjs.com) — Pollinator Index map, loaded on scroll
+- **Home** — the brand promise, the three-product range, why honey works, the Yucatán origin story, live
+  pollinator stats and a single waitlist sign-up.
+- **Our honey** — how raw honey hydrates hair and skin, an ingredient glossary, and a guide to composting
+  the home-compostable bottle.
+- **Origin** — the Mayan stingless bee (*xunan kab*), the journey from hive to bottle, and the founders' story.
+- **Pollinator Index** — live open data: Mayan bee records from GBIF on a map, Mérida weather from
+  Open-Meteo, the brand's planting corridor, and a lookup that counts real bee sightings near your town
+  via iNaturalist.
+- **The range** — concept shampoo, conditioner and body wash, marked coming soon.
+- **Join the hive** — waitlist with launch access, wildflower seeds and a weekly sample-pack draw
+  (demo only; nothing is sent anywhere).
+- **Concept notes** — the audit of the original site and the design decisions behind this redesign.
+- **Credits** — sources for the CC0 photography and open data.
 
-## Live data
+## Tech stack
 
-The Pollinator Index uses open, keyless APIs. Figures are fetched at build time with saved fallbacks, and refreshed in the browser where useful.
-
-| Source | Used for |
-| --- | --- |
-| GBIF | *Melipona beecheii* (Mayan stingless bee) records in Mexico and Yucatán |
-| iNaturalist | Wild bee sightings near a visitor's town |
-| Open-Meteo | Mérida weather and place search |
-| huni corridor API | Planting corridor pins (read-only — the site never writes to it) |
-
-Sign-ups and planted patches are mocked and stay in the visitor's browser.
-
-## Develop
-
-```sh
-npm install
-npm run dev      # http://localhost:4321
-npm run build
-npm run check
-```
-
-## Credits
-
-All photography is CC0 / public domain via Openverse (Wikimedia Commons, rawpixel, StockSnap). Fonts are
-Fraunces, Instrument Sans and Courier Prime under the SIL Open Font Licence. Full list at `/credits`.
+- [Astro](https://astro.build)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Motion](https://motion.dev)
+- [Leaflet](https://leafletjs.com)
+- [TypeScript](https://www.typescriptlang.org)
