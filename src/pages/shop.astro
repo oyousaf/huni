@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import Bottle from '../components/Bottle.astro';
+import { Image } from 'astro:assets';
 import JoinForm from '../components/JoinForm.astro';
 import { range } from '../lib/range';
 ---
@@ -13,8 +13,8 @@ import { range } from '../lib/range';
     {
       range.map((p, i) => (
         <article class:list={['grid items-center gap-10 md:grid-cols-2', i % 2 && 'md:[&>*:first-child]:order-2']}>
-          <div class="grid place-items-center rounded-[2.5rem] bg-wax py-16" data-reveal>
-            <Bottle name={p.name} tint={p.tint} class="h-80" />
+          <div class="grid place-items-center overflow-hidden rounded-[2.5rem] bg-wax py-8" data-reveal>
+            <Image src={p.image} alt={`${p.name} bottle (concept render)`} widths={[480, 800, 1200]} sizes="(min-width: 768px) 45vw, 100vw" class="w-full max-w-md" />
           </div>
           <div data-reveal data-delay="0.1">
             <p class="label">{p.note}</p>

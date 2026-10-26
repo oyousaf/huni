@@ -19,10 +19,12 @@ export function initMotion() {
   inView('[data-count]', (el) => {
     const node = el as HTMLElement;
     const target = Number(node.dataset.count);
+    const decimals = Number(node.dataset.decimals ?? 0);
+    const fmt = { minimumFractionDigits: decimals, maximumFractionDigits: decimals };
     animate(0, target, {
       duration: 1.6,
       ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => (node.textContent = Math.round(v).toLocaleString('en-GB')),
+      onUpdate: (v) => (node.textContent = v.toLocaleString('en-GB', fmt)),
     });
   });
 

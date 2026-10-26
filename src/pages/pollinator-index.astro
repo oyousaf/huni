@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import HexStat from '../components/HexStat.astro';
 import { getCorridorPins, getMayanBee, getMeridaWeather } from '../lib/data';
+import { faoMexico as fao } from '../lib/fao';
 
 const [bee, weather, pins] = await Promise.all([getMayanBee(), getMeridaWeather(), getCorridorPins()]);
 const builtAt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -22,6 +23,25 @@ const builtAt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 
     <p class="mt-12 text-center font-label text-[11px] text-ink/60">Snapshot built {builtAt}{!bee.live && ' · GBIF offline at build, showing saved figures'}.</p>
   </section>
 
+  <!-- Mexico's honey: FAOSTAT -->
+  <section class="hex-bg bg-jungle-deep py-24 text-cream">
+    <div class="wrap">
+      <SectionHead label="Mexico's honey · FAOSTAT" title="A top-ten honey nation, <em>hive by hive</em>." light center>
+        <p class="mt-5 text-cream/70">
+          Mexico produced {fao.honeyTonnes1961.toLocaleString('en-GB')} tonnes of honey in 1961. By 2024 that had more than doubled.
+        </p>
+      </SectionHead>
+      <div class="mt-16 grid gap-y-14 sm:grid-cols-3">
+        <HexStat value={fao.honeyTonnes.value} label={`Tonnes of natural honey produced in ${fao.honeyTonnes.year}`} source={fao.source} />
+        <HexStat value={fao.worldRank.value} prefix="#" label={`Mexico's place among the world's honey producers, ${fao.worldRank.year}`} source={fao.source} delay={0.08} />
+        <HexStat value={fao.beehives.value / 1e6} decimals={1} suffix="M" label={`Beehives kept across Mexico (${fao.beehives.value.toLocaleString('en-GB')}, ${fao.beehives.year})`} source={fao.source} delay={0.16} />
+      </div>
+      <p class="mt-14 text-center font-label text-[11px] text-cream/50">
+        Source: <a href={fao.url} rel="noopener" class="underline underline-offset-4">FAOSTAT, Crops and livestock products</a> · latest official figures.
+      </p>
+    </div>
+  </section>
+
   <!-- Map -->
   <section class="bg-wax py-20">
     <div class="wrap">
@@ -34,7 +54,7 @@ const builtAt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 
       </div>
       <div
         id="bee-map"
-        class="mt-10 h-[60svh] min-h-96 overflow-hidden rounded-[2rem] border border-stone bg-stone"
+        class="mt-10 h-[60svh] min-h-96 overflow-hidden rounded-4xl border border-stone bg-stone"
         data-bees={JSON.stringify(bee.points)}
         data-pins={JSON.stringify(pins)}
       ></div>
@@ -52,7 +72,7 @@ const builtAt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 
       <SectionHead label="Plant your patch" title="How busy is <em>your</em> corner?">
         <p class="mt-5 text-ink-soft">Type your town or city. We'll count real wild bee sightings recorded near you this year on iNaturalist, and drop your patch on the corridor.</p>
       </SectionHead>
-      <form id="patch-form" class="mt-8 flex max-w-lg flex-col gap-2 rounded-[2rem] border border-ink/15 bg-wax p-2 sm:flex-row sm:rounded-full" data-reveal>
+      <form id="patch-form" class="mt-8 flex max-w-lg flex-col gap-2 rounded-4xl border border-ink/15 bg-wax p-2 sm:flex-row sm:rounded-full" data-reveal>
         <label for="patch-city" class="sr-only">Town or city</label>
         <input id="patch-city" required placeholder="e.g. Manchester" class="min-w-0 flex-1 bg-transparent px-5 py-3 outline-none placeholder:text-ink/40" />
         <button class="btn-honey justify-center">Plant my patch →</button>
@@ -61,7 +81,7 @@ const builtAt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 
       <p class="font-label text-[10px] text-ink/50">Concept demo: your patch is saved in this browser only. Nothing is sent to huni.</p>
     </div>
 
-    <aside class="hex-bg rounded-[2rem] bg-jungle-deep p-8 text-cream" data-reveal data-delay="0.1">
+    <aside class="hex-bg rounded-4xl bg-jungle-deep p-8 text-cream" data-reveal data-delay="0.1">
       <p class="label-light">Hive weather · Mérida</p>
       <p class="mt-6 font-display text-7xl font-light"><span id="wx-temp">{Math.round(weather.temp)}</span>°C</p>
       <dl class="mt-6 grid grid-cols-2 gap-4 font-label text-sm">

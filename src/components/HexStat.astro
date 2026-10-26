@@ -3,16 +3,19 @@ interface Props {
   value: number;
   label: string;
   source: string;
+  prefix?: string;
   suffix?: string;
+  decimals?: number;
   delay?: number;
 }
-const { value, label, source, suffix = '', delay = 0 } = Astro.props;
+const { value, label, source, prefix = '', suffix = '', decimals = 0, delay = 0 } = Astro.props;
+const shown = value.toLocaleString('en-GB', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 ---
 
 <div class="flex flex-col items-center text-center" data-reveal data-delay={delay}>
   <div class="hex-clip grid aspect-[1.1] w-40 place-items-center bg-gradient-to-b from-comb to-honey text-ink sm:w-44">
     <span class="font-label text-3xl font-bold tabular-nums sm:text-4xl">
-      <span data-count={value}>{value.toLocaleString('en-GB')}</span>{suffix}
+      {prefix}<span data-count={value} data-decimals={decimals}>{shown}</span>{suffix}
     </span>
   </div>
   <p class="mt-5 max-w-[14rem] text-sm leading-snug">{label}</p>
