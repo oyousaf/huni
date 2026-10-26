@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://huni-concept.pages.dev',
+  site: 'https://huni.legxcysol.dev',
   vite: { plugins: [tailwindcss()] },
 });
