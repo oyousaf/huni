@@ -5,6 +5,7 @@ import SectionHead from '../components/SectionHead.astro';
 import HexStat from '../components/HexStat.astro';
 import DripEdge from '../components/DripEdge.astro';
 import JoinForm from '../components/JoinForm.astro';
+import ProductCard from '../components/ProductCard.astro';
 import { range } from '../lib/range';
 import { getCorridorPins, getMayanBee, getMeridaWeather } from '../lib/data';
 
@@ -75,22 +76,13 @@ const benefits = [
   <!-- The range -->
   <section class="relative bg-wax py-24">
     <div class="wrap">
-      <SectionHead label="The first chapter" title="Three formulas. <em>One</em> hero ingredient." center>
-        <p class="mt-5 text-ink-soft">A short, honest range — each one built around raw honey, not decorated with it.</p>
+      <SectionHead label="The first chapter" title="Six formulas. <em>One</em> hero ingredient." center>
+        <p class="mt-5 text-ink-soft">A short, honest range for hair and body — each one built around raw honey, not decorated with it.</p>
       </SectionHead>
-      <div class="mt-16 grid gap-6 md:grid-cols-3">
-        {
-          range.map((p, i) => (
-            <article class="group rounded-3xl border border-stone bg-cream p-8 text-center transition-shadow hover:shadow-[0_24px_60px_-30px_rgb(138_74_18/0.45)]" data-reveal data-delay={i * 0.1}>
-              <Image src={p.image} alt={`${p.name} bottle (concept render)`} widths={[360, 720]} sizes="(min-width: 768px) 30vw, 90vw" class="mx-auto w-full max-w-64 transition-transform duration-500 ease-honey group-hover:-translate-y-2" />
-              <h3 class="mt-6 text-2xl">{p.name}</h3>
-              <p class="label mt-2">{p.note}</p>
-              <p class="mt-4 text-sm text-ink-soft">{p.copy}</p>
-            </article>
-          ))
-        }
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {range.map((p, i) => <ProductCard product={p} delay={(i % 3) * 0.1} />)}
       </div>
-      <p class="mt-10 text-center"><a href="/shop" class="font-label text-sm underline decoration-comb decoration-2 underline-offset-4">See the range →</a></p>
+      <p class="mt-10 text-center"><a href="/shop" class="font-label text-sm underline decoration-comb decoration-2 underline-offset-4">See the range &amp; sets →</a></p>
     </div>
   </section>
 

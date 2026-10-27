@@ -1,32 +1,69 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { Image } from 'astro:assets';
+import SectionHead from '../components/SectionHead.astro';
+import ProductCard from '../components/ProductCard.astro';
 import JoinForm from '../components/JoinForm.astro';
-import { range } from '../lib/range';
+import { bundles, range } from '../lib/range';
+
+const groups = [
+  { label: 'For hair', title: 'Cleanse, condition, <em>treat</em>.', products: range.filter((p) => p.category === 'hair') },
+  { label: 'For body', title: 'Wash, lather, <em>soften</em>.', products: range.filter((p) => p.category === 'body') },
+];
 ---
 
-<Base title="The range" description="The first huni range: shampoo, conditioner and body wash. Concept preview.">
-  <PageHero label="The range · coming soon" title="Chapter one, <em>bottled</em>." intro="Three everyday formulas, each built around organic raw honey. Join the hive to hear first when they land." />
+<Base title="The range" description="The first huni range: six honey formulas for hair and body, plus three sets. Concept preview.">
+  <PageHero label="The range · coming soon" title="Six formulas, <em>one</em> honey." intro="Everyday hair and body care, each built around organic raw honey — plus three sets that put them together. Join the hive to hear first when they land." />
 
-  <section class="wrap grid gap-20 py-24">
-    {
-      range.map((p, i) => (
-        <article class:list={['grid items-center gap-10 md:grid-cols-2', i % 2 && 'md:[&>*:first-child]:order-2']}>
-          <div class="grid place-items-center overflow-hidden rounded-[2.5rem] bg-wax py-8" data-reveal>
-            <Image src={p.image} alt={`${p.name} bottle (concept render)`} widths={[480, 800, 1200]} sizes="(min-width: 768px) 45vw, 100vw" class="w-full max-w-md" />
+  {
+    groups.map((g, gi) => (
+      <section class:list={['py-20', gi % 2 && 'bg-wax']}>
+        <div class="wrap">
+          <SectionHead label={g.label} title={g.title} />
+          <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {g.products.map((p, i) => <ProductCard product={p} delay={i * 0.1} />)}
           </div>
-          <div data-reveal data-delay="0.1">
-            <p class="label">{p.note}</p>
-            <h2 class="mt-4 text-4xl font-light sm:text-5xl">{p.name}</h2>
-            <p class="mt-5 max-w-md text-lg text-ink-soft">{p.copy}</p>
-            <p class="mt-8 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 font-label text-xs">
-              <span class="size-2 rounded-full bg-comb" /> Coming soon
-            </p>
-          </div>
-        </article>
-      ))
-    }
+        </div>
+      </section>
+    ))
+  }
+
+  <!-- Sets -->
+  <section class="py-24">
+    <div class="wrap">
+      <SectionHead label="Sets" title="Better <em>together</em>." center>
+        <p class="mt-5 text-ink-soft">Three ready-made routines, gift-boxed in compostable card.</p>
+      </SectionHead>
+      <div class="mt-16 grid gap-16">
+        {
+          bundles.map((b, i) => (
+            <article class:list={['grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]', i % 2 && 'lg:[&>*:first-child]:order-2']}>
+              <div class="overflow-hidden rounded-[2.5rem] bg-wax" data-reveal>
+                <Image src={b.image} alt={`${b.name} set: ${b.products.map((p) => p.name).join(', ')} (concept render)`} widths={[640, 1000, 1600]} sizes="(min-width: 1024px) 58vw, 100vw" class="w-full" />
+              </div>
+              <div data-reveal data-delay="0.1">
+                <p class="label">Set of {b.products.length}</p>
+                <h3 class="mt-4 text-4xl font-light sm:text-5xl">{b.name}</h3>
+                <p class="mt-5 max-w-md text-lg text-ink-soft">{b.tagline}</p>
+                <ul class="mt-6 grid gap-2 border-t border-stone pt-6 text-sm">
+                  {b.products.map((p) => (
+                    <li class="flex items-center gap-3">
+                      <span class="hex-clip size-3 shrink-0 bg-comb" />
+                      {p.name}
+                      <span class="font-label text-[11px] text-ink/55">{p.format}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p class="mt-8 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 font-label text-xs">
+                  <span class="size-2 rounded-full bg-comb" /> Coming soon
+                </p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
   </section>
 
   <section class="hex-bg bg-ink py-24 text-cream">

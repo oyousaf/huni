@@ -5,15 +5,15 @@ Mayan beekeepers in Yucatán, Mexico. Unofficial and not affiliated with huni Be
 
 ## What's on the site
 
-- **Home** — the brand promise, the three-product range, why honey works, the Yucatán origin story, live
-  pollinator stats and a single waitlist sign-up.
+- **Home** — the brand promise, the six-product range, why honey works, the Yucatán origin story, live  pollinator stats and a single waitlist sign-up.
 - **Our honey** — how raw honey hydrates hair and skin, an ingredient glossary, and a guide to composting
   the home-compostable bottle.
 - **Origin** — the Mayan stingless bee (*xunan kab*), the journey from hive to bottle, and the founders' story.
 - **Pollinator Index** — live open data: Mayan bee records from GBIF on a map, Mérida weather from
   Open-Meteo, the brand's planting corridor, and a lookup that counts real bee sightings near your town
   via iNaturalist.
-- **The range** — concept shampoo, conditioner and body wash, marked coming soon.
+- **The range** — six concept products for hair and body (shampoo, conditioner, hair mask, body wash, soap bar,
+  hand cream) and three sets: huni essentials, huni hair ritual and huni body ritual.
 - **Join the hive** — waitlist with launch access, wildflower seeds and a weekly sample-pack draw
   (demo only; nothing is sent anywhere).
 - **Concept notes** — the audit of the original site and the design decisions behind this redesign.

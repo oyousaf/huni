@@ -11,6 +11,9 @@ const glossary = [
   { term: 'Keratin', what: 'The structural protein hair is made of.', why: 'Fills weak spots along the strand so it feels stronger and smoother.' },
   { term: 'Botanical oils', what: 'Plant oils pressed for richness.', why: 'Seal in the moisture honey draws in, and add slip and shine.' },
   { term: 'Wildflower extract', what: 'Extract from the flowers the bees forage on.', why: 'A softening, skin-friendly botanical that ties the formula back to the hive.' },
+  { term: 'Shea butter', what: 'A rich butter pressed from the nut of the shea tree.', why: 'Gives the hair mask and hand cream their cushion and helps lock in moisture.' },
+  { term: 'Beeswax', what: 'The wax bees build their comb from.', why: 'Hardens the soap bar naturally and leaves a light, protective feel on skin.' },
+  { term: 'Oat', what: 'Finely milled oat kernel.', why: 'A gentle, comforting addition to the soap bar for everyday washing.' },
 ];
 
 const compost = [
@@ -41,7 +44,7 @@ const compost = [
       <dl class="mt-14 grid gap-px overflow-hidden rounded-3xl border border-stone bg-stone sm:grid-cols-2">
         {
           glossary.map((g, i) => (
-            <div class="bg-cream p-8" data-reveal data-delay={(i % 2) * 0.08}>
+            <div class="bg-cream p-8 sm:odd:last:col-span-2" data-reveal data-delay={(i % 2) * 0.08}>
               <dt class="font-display text-2xl">{g.term}</dt>
               <dd class="mt-3 text-sm text-ink-soft">{g.what}</dd>
               <dd class="mt-3 border-t border-stone pt-3 text-sm"><span class="label mr-2">Why</span>{g.why}</dd>

@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import type { Product } from '../lib/range';
+
+interface Props {
+  product: Product;
+  delay?: number;
+}
+const { product: p, delay = 0 } = Astro.props;
+---
+
+<article
+  class="group rounded-3xl border border-stone bg-cream p-6 text-center transition-shadow hover:shadow-[0_24px_60px_-30px_rgb(138_74_18/0.45)] sm:p-8"
+  data-reveal
+  data-delay={delay}
+>
+  <Image
+    src={p.image}
+    alt={`${p.name} (concept render)`}
+    widths={[360, 720]}
+    sizes="(min-width: 768px) 30vw, 90vw"
+    class="mx-auto w-full max-w-72 transition-transform duration-500 ease-honey group-hover:-translate-y-2"
+  />
+  <h3 class="mt-6 text-2xl">{p.name}</h3>
+  <p class="label mt-2">{p.note}</p>
+  <p class="mt-4 text-sm text-ink-soft">{p.copy}</p>
+  <p class="mt-5 font-label text-[11px] text-ink/55">{p.format}</p>
+</article>
