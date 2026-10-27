@@ -5,19 +5,19 @@ import bodyWash from '../assets/images/range/body-wash.png';
 
 export const range = [
   {
-    name: 'Honey shampoo',
+    name: 'huni shampoo',
     note: 'Raw honey · botanical oils',
     copy: 'A gentle, low-foam cleanse that leaves moisture where it belongs.',
     image: shampoo,
   },
   {
-    name: 'Honey conditioner',
+    name: 'huni conditioner',
     note: 'Raw honey · keratin',
     copy: 'Smooths the cuticle and seals in softness without weighing hair down.',
     image: conditioner,
   },
   {
-    name: 'Honey body wash',
+    name: 'huni body wash',
     note: 'Raw honey · wildflower extract',
     copy: 'A slow, golden lather for skin that feels fed, not stripped.',
     image: bodyWash,
