@@ -5,6 +5,15 @@ import Footer from '../components/Footer.astro';
 import BeeFlight from '../components/BeeFlight.astro';
 import ToTop from '../components/ToTop.astro';
 import { site } from '../lib/site';
+// Fonts used above the fold. Preloading them means text paints in its final face
+// instead of a fallback that swaps (and shifts the header) a moment later.
+import sansUrl from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
+import displayUrl from '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url';
+import displayItalicUrl from '@fontsource-variable/fraunces/files/fraunces-latin-full-italic.woff2?url';
+import labelUrl from '@fontsource/courier-prime/files/courier-prime-latin-400-normal.woff2?url';
+import labelBoldUrl from '@fontsource/courier-prime/files/courier-prime-latin-700-normal.woff2?url';
+
+const preloadFonts = [sansUrl, displayUrl, displayItalicUrl, labelUrl, labelBoldUrl];
 
 interface Props {
   title?: string;
@@ -22,6 +31,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />

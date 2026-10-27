@@ -5,6 +5,25 @@
 @import '@fontsource/courier-prime/400.css';
 @import '@fontsource/courier-prime/700.css';
 
+/* Local fallbacks resized to the brand fonts' widths, so text doesn't shift if a web font
+   arrives after first paint. Ratios measured against each font; Courier New already matches Courier Prime. */
+@font-face {
+  font-family: 'Instrument Sans Fallback';
+  src: local('Arial');
+  size-adjust: 101.33%;
+}
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia');
+  size-adjust: 81.82%;
+}
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-style: italic;
+  src: local('Georgia Italic');
+  size-adjust: 75.13%;
+}
+
 /* "Liquid honey" palette: gold leads, orange only adds depth. */
 @theme {
   --color-comb: #e0a526;
@@ -18,9 +37,9 @@
   --color-jungle-deep: #1f3328;
   --color-stone: #e4dccb;
 
-  --font-display: 'Fraunces Variable', Georgia, serif;
-  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
-  --font-label: 'Courier Prime', ui-monospace, monospace;
+  --font-display: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', 'Instrument Sans Fallback', system-ui, sans-serif;
+  --font-label: 'Courier Prime', 'Courier New', ui-monospace, monospace;
 
   --ease-honey: cubic-bezier(0.22, 1, 0.36, 1);
 }
