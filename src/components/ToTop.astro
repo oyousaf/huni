@@ -1,0 +1,58 @@
+---
+// Hexagon back-to-top button. Honey fills it as you scroll; the flight bee lands on it at the bottom.
+---
+
+<button
+  id="to-top"
+  type="button"
+  aria-label="Back to top"
+  data-visible="false"
+  tabindex="-1"
+  aria-hidden="true"
+  class="group fixed right-4 bottom-4 z-20 h-14 w-12 translate-y-3 opacity-0 drop-shadow-[0_10px_18px_rgb(138_74_18/0.35)] transition-[opacity,translate] duration-300 ease-honey data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 data-[visible=false]:pointer-events-none sm:right-6 sm:bottom-6 sm:h-16 sm:w-14"
+>
+  <svg viewBox="0 0 56 64" class="size-full transition-transform duration-200 ease-honey group-hover:-translate-y-0.5" aria-hidden="true">
+    <defs>
+      <clipPath id="to-top-hex"><path d="M28 2 54 17v30L28 62 2 47V17z" /></clipPath>
+      <linearGradient id="to-top-honey" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--color-comb)" />
+        <stop offset="1" stop-color="var(--color-honey)" />
+      </linearGradient>
+    </defs>
+    <path d="M28 2 54 17v30L28 62 2 47V17z" fill="var(--color-wax)" />
+    <g clip-path="url(#to-top-hex)">
+      <rect id="to-top-fill" width="56" height="64" fill="url(#to-top-honey)" style="transform-box:fill-box;transform-origin:bottom;transform:scaleY(0)" />
+    </g>
+    <path d="M28 2 54 17v30L28 62 2 47V17z" fill="none" stroke="var(--color-honey)" stroke-width="1.5" />
+    <path d="M28 41V24m-7 7 7-7 7 7" fill="none" stroke="var(--color-ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</button>
+
+<script>
+  const btn = document.getElementById('to-top')!;
+  const fill = document.getElementById('to-top-fill')!;
+  let queued = false;
+
+  const update = () => {
+    queued = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const progress = max > 0 ? Math.min(1, scrollY / max) : 0;
+    fill.style.transform = `scaleY(${progress})`;
+    const visible = scrollY > innerHeight;
+    if (String(visible) !== btn.dataset.visible) {
+      btn.dataset.visible = String(visible);
+      btn.tabIndex = visible ? 0 : -1;
+      btn.setAttribute('aria-hidden', String(!visible));
+    }
+  };
+
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+
+  btn.addEventListener('click', () => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    document.getElementById('main')?.focus({ preventScroll: true });
+  });
+</script>

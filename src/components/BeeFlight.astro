@@ -1,12 +1,13 @@
 ---
 // A single line-drawn bee tracing a dotted path down the right edge as you scroll.
+// The path stops short of the corner; motion.ts lands the bee on the back-to-top button from there.
 ---
 
 <div id="flight" class="pointer-events-none fixed top-0 right-2 z-30 hidden h-dvh w-16 lg:block" aria-hidden="true">
   <svg class="absolute inset-0 size-full" viewBox="0 0 64 1000" preserveAspectRatio="none">
     <path
       id="flight-path"
-      d="M40 20 C 10 120, 58 200, 30 300 S 50 480, 24 560 S 56 760, 34 840 S 20 940, 36 985"
+      d="M40 20 C 10 120, 58 200, 30 300 S 50 480, 24 560 S 56 720, 34 790 S 22 860, 28 880"
       fill="none"
       stroke="var(--color-honey)"
       stroke-opacity=".35"

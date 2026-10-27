@@ -38,19 +38,33 @@ export function initMotion() {
 
   // The bee follows its dotted flight path as the page scrolls.
   // The path is drawn in a stretched 64×1000 viewBox, so map points back to pixels.
+  // The bee flies the path for most of the page, then lands on the back-to-top hexagon.
   const box = document.querySelector<HTMLElement>('#flight');
   const path = document.querySelector<SVGPathElement>('#flight-path');
   const bee = document.querySelector<SVGSVGElement>('#flight-bee');
+  const toTop = document.querySelector<HTMLElement>('#to-top');
+  const LAND = 0.93;
+  const mix = (from: number, to: number, t: number) => from + (to - from) * t;
   if (box && path && bee) {
     const len = path.getTotalLength();
     scroll((p: number) => {
       const sx = box.clientWidth / 64;
       const sy = box.clientHeight / 1000;
-      const at = Math.min(len - 2, p * len);
+      const at = Math.min(len - 2, (Math.min(p, LAND) / LAND) * len);
       const a = path.getPointAtLength(at);
       const b = path.getPointAtLength(at + 2);
-      const angle = (Math.atan2((b.y - a.y) * sy, (b.x - a.x) * sx) * 180) / Math.PI;
-      bee.style.transform = `translate(${a.x * sx}px, ${a.y * sy}px) translate(-50%, -50%) rotate(${angle}deg)`;
+      let x = a.x * sx;
+      let y = a.y * sy;
+      let angle = (Math.atan2((b.y - a.y) * sy, (b.x - a.x) * sx) * 180) / Math.PI;
+      if (p > LAND && toTop?.dataset.visible === 'true') {
+        const t = 1 - (1 - (p - LAND) / (1 - LAND)) ** 3;
+        const btn = toTop.getBoundingClientRect();
+        const origin = box.getBoundingClientRect();
+        x = mix(x, btn.left + btn.width / 2 - origin.left, t);
+        y = mix(y, btn.top + 3 - origin.top, t);
+        angle = mix(angle, -90, t);
+      }
+      bee.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${angle}deg)`;
     });
   }
 }
